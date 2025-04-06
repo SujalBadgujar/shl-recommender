@@ -1,29 +1,22 @@
-# Core dependencies
-sentence-transformers==2.2.2
-torch>=1.9.0
-numpy>=1.21.0
-requests>=2.28.0
-beautifulsoup4>=4.11.0
-lxml>=4.9.0
-concurrent-log-handler  # For ThreadPoolExecutor
+# 🔧 Core dependencies
 Flask
+sentence-transformers==2.2.2
+torch==1.12.1
+numpy>=1.21.0
 
-# Optional (Render often needs these to prevent build errors)
-scikit-learn>=1.0.0
-scipy>=1.7.0
-pandas>=1.3.0
+# 🔍 Scraping utilities (if used during runtime)
+requests
+beautifulsoup4
+lxml
 
-# Used by sentence-transformers and utilities
+# 🔤 Required by sentence-transformers
 transformers>=4.20.0
 tokenizers>=0.12.1
+tqdm
+scikit-learn
 
-# If sentence-transformers complains about them
-nltk>=3.6.0
-tqdm>=4.62.0
-
-# Web scraping and HTML parsing
-html5lib>=1.1
-certifi>=2022.6.15
-
-# In case JSON data manipulation grows
-ujson>=5.1.0
+# ✅ Optional: Only if you're doing more preprocessing or heavy manipulation
+# pandas
+# scipy
+# nltk
+# ujson

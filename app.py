@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 corpus_embeddings = torch.tensor(np.load("corpus_embeddings.npy"))
-with open("corpus_data.json") as f:
+with open("data_scraped.json") as f:
     shl_data = json.load(f)
 
 @app.route("/", methods=["GET", "POST"])

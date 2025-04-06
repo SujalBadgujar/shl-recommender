@@ -5,18 +5,18 @@ torch
 numpy>=1.21.0
 huggingface_hub==0.14.1
 
-# 🔍 Scraping utilities (if used during runtime)
+# 🔍 Optional: Scraping utilities
 requests
 beautifulsoup4
 lxml
 
 # 🔤 Required by sentence-transformers
-transformers>=4.20.0
-tokenizers>=0.12.1
+transformers==4.30.2
+tokenizers==0.13.3
 tqdm
 scikit-learn
 
-# ✅ Optional: Only if you're doing more preprocessing or heavy manipulation
+# ✅ Optional: Preprocessing (uncomment if needed)
 # pandas
 # scipy
 # nltk

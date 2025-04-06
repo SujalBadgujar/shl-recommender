@@ -1,23 +1,9 @@
-# 🔧 Core dependencies
 Flask
 sentence-transformers==2.2.2
 torch
 numpy>=1.21.0
 huggingface_hub==0.14.1
-
-# 🔍 Optional: Scraping utilities
-requests
-beautifulsoup4
-lxml
-
-# 🔤 Required by sentence-transformers
 transformers==4.30.2
 tokenizers==0.13.3
-tqdm
 scikit-learn
-
-# ✅ Optional: Preprocessing (uncomment if needed)
-# pandas
-# scipy
-# nltk
-# ujson
+tqdm

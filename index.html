@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SHL Test Recommender</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHL Test Recommender</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>🔍 SHL Test Recommender</h1>
-    <form method="POST">
-        <input type="text" name="query" placeholder="Enter job description..." required>
-        <button type="submit">Recommend</button>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+  <div class="max-w-3xl mx-auto mt-16 p-6 bg-white shadow-xl rounded-xl">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">🔍 SHL Test Recommender</h1>
+
+    <form method="POST" class="flex flex-col md:flex-row gap-4 mb-6">
+      <input type="text" name="query" placeholder="Enter job description..." required
+        class="flex-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+      <button type="submit"
+        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">Recommend</button>
     </form>
 
     {% if recommendations %}
-        <h2>Top Recommendations</h2>
-        <ul>
-            {% for item in recommendations %}
-                <li><b>{{ item.title }}</b> — {{ item.test_type }} | {{ item.duration }} mins | Remote: {{ item.remote_testing }}</li>
-            {% endfor %}
-        </ul>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-700">Top Recommendations</h2>
+      <ul class="space-y-4">
+        {% for item in recommendations %}
+          <li class="bg-gray-50 p-4 rounded-lg shadow hover:bg-gray-100 transition">
+            <a href="{{ item.link }}" target="_blank" class="text-blue-600 font-bold text-lg hover:underline">
+              {{ item.title }}
+            </a>
+            <p class="text-sm text-gray-600 mt-1">
+              {{ item.test_type }} | Duration: {{ item.duration }} mins | Remote: {{ item.remote_testing }}
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
     {% endif %}
+  </div>
+
 </body>
 </html>

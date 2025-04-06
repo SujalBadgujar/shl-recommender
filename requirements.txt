@@ -1,7 +1,7 @@
 # 🔧 Core dependencies
 Flask
 sentence-transformers==2.2.2
-torch==1.12.1
+torch
 numpy>=1.21.0
 
 # 🔍 Scraping utilities (if used during runtime)

@@ -22,6 +22,7 @@ def index():
         recommendations = [shl_data[i] for i in top_results.indices]
 
     return render_template("index.html", recommendations=recommendations)
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))  # Get the port from Railway
+    app.run(host="0.0.0.0", port=port)

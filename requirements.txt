@@ -6,6 +6,7 @@ requests>=2.28.0
 beautifulsoup4>=4.11.0
 lxml>=4.9.0
 concurrent-log-handler  # For ThreadPoolExecutor
+Flask
 
 # Optional (Render often needs these to prevent build errors)
 scikit-learn>=1.0.0

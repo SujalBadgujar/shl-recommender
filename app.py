@@ -18,7 +18,7 @@ if not GEMINI_API_KEY:
 
 # Configure Gemini model
 genai.configure(api_key=GEMINI_API_KEY)
-gemini_model = genai.GenerativeModel(model_name="gemini-pro")
+gemini_model = genai.GenerativeModel(model_name="gemini-2.0-flash")
 
 # Load corpus and embeddings
 corpus_embeddings = torch.tensor(np.load("corpus_embeddings.npy"))

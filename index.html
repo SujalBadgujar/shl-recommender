@@ -5,35 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SHL Test Recommender</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@heroicons/v2.0.18/24/outline/index.js"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="backdrop-blur-lg bg-white/80 shadow-2xl rounded-2xl p-8 transition-all duration-300 hover:shadow-3xl">
+        <div class=" items-center justify-center  mb-8">
+            <heroicon-outline-magnifying-glass class="w-12 h-12 text-blue-600" />
+            <h1 class="text-4xl font-bold  bg-clip-text whitespace-nowrap">
+              SHL Test Recommender
+            </h1>
+          </div>
+          
 
-  <div class="max-w-3xl mx-auto mt-16 p-6 bg-white shadow-xl rounded-xl">
-    <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">🔍 SHL Test Recommender</h1>
+      <form method="POST" class="group relative mb-10">
+        <div class="flex gap-4">
+          <input type="text" name="query" placeholder="Paste job description here..." required
+            class="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all
+                   placeholder-gray-400 hover:border-blue-300" />
+          <button type="submit"
+            class="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02]
+                   transition-all  items-center gap-2">
+            <heroicon-outline-sparkles class="w-6 h-6" />
+            Analyze
+          </button>
+        </div>
+        <div class="absolute inset-x-0 -bottom-4 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <div class="h-1 bg-gradient-to-r from-blue-200 to-purple-200 w-3/4 rounded-full"></div>
+        </div>
+      </form>
 
-    <form method="POST" class="flex flex-col md:flex-row gap-4 mb-6">
-      <input type="text" name="query" placeholder="Enter job description..." required
-        class="flex-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-      <button type="submit"
-        class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">Recommend</button>
-    </form>
+      {% if recommendations %}
+      <div class="space-y-6 animate-fade-in-up">
+        <h2 class="text-2xl font-bold text-gray-700 mb-6 flex items-center gap-2">
+          <heroicon-outline-trophy class="w-8 h-8 text-amber-500" />
+        Recommendations
+        </h2>
+        
+        <div class="grid gap-4">
+          {% for item in recommendations %}
+          <a href="{{ item.link }}" target="_blank" 
+             class="group bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-blue-500
+                    hover:border-purple-500 transform hover:-translate-y-1 flex items-start gap-4">
+            <div class="flex-shrink-0 p-3 bg-blue-50 rounded-lg">
+              <heroicon-outline-document-text class="w-6 h-6 text-blue-600" />
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
+                {{ item.title }}
+              </h3>
+              <div class="mt-2 flex flex-wrap gap-3">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">{{ item.test_type }}</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">{{ item.duration }} mins</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">
+                    {{ '✅ Adaptive/RT' if item.adaptive_rt == 'Yes' else '❌ Adaptive/RT' }}
 
-    {% if recommendations %}
-      <h2 class="text-2xl font-semibold mb-4 text-gray-700">Top Recommendations</h2>
-      <ul class="space-y-4">
-        {% for item in recommendations %}
-          <li class="bg-gray-50 p-4 rounded-lg shadow hover:bg-gray-100 transition">
-            <a href="{{ item.link }}" target="_blank" class="text-blue-600 font-bold text-lg hover:underline">
-              {{ item.title }}
-            </a>
-            <p class="text-sm text-gray-600 mt-1">
-              {{ item.test_type }} | Duration: {{ item.duration }} mins | Remote: {{ item.remote_testing }}
-            </p>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+                  </span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">
+                  {{ '✅ Remote' if item.remote_testing == 'Yes' else '❌ On-site' }}
+                </span>
+              </div>
+            </div>
+            <heroicon-outline-arrow-top-right-on-square class="w-5 h-5 text-gray-400 ml-2 group-hover:text-purple-500 transition-colors" />
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
   </div>
 
+  <style>
+    @keyframes fade-in-up {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out;
+    }
+  </style>
 </body>
 </html>

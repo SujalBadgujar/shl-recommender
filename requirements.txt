@@ -17,4 +17,3 @@ requests
 beautifulsoup4
 lxml
 setuptools_rust>=1.8.0
---upgrade pip

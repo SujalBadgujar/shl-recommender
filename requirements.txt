@@ -16,3 +16,5 @@ tokenizers==0.13.3  # ✅ Compatible with Python 3.10
 requests
 beautifulsoup4
 lxml
+setuptools_rust>=1.8.0
+--upgrade pip

@@ -70,12 +70,44 @@ def index():
         recommendations = recommend(query)
     return render_template("index.html", recommendations=recommendations)
 
-@app.route("/api", methods=["POST"])
+@app.route("/api", methods=["GET", "POST"])
 def api():
+    if request.method == "POST":
+        data = request.get_json()
+        query = data.get("query")
+        results = recommend(query)
+        return jsonify({"results": results})
+    else:
+        return jsonify({"message": "Send a POST request with a 'query' key."})
+
+
+@app.route("/health", methods=["GET"])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
+@app.route("/recommend", methods=["POST"])
+def recommend_assessments():
     data = request.get_json()
     query = data.get("query")
-    results = recommend(query)
-    return jsonify({"results": results})
+
+    if not query:
+        return jsonify({"error": "Query field is required"}), 400
+
+    raw_results = recommend(query)  # This is your existing logic
+
+    # Transform your raw recommendations into required format
+    formatted_results = []
+    for r in raw_results[:10]:  # Max 10 items
+        formatted_results.append({
+            "url": r.get("url", ""),
+            "adaptive_support": r.get("adaptive_support", "No"),
+            "description": r.get("description", ""),
+            "duration": r.get("duration", 0),
+            "remote_support": r.get("remote_support", "No"),
+            "test_type": r.get("test_type", [])
+        })
+
+    return jsonify({"recommended_assessments": formatted_results}), 200
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
